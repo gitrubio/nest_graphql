@@ -2,69 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Todo {
-  id: Int!
-  title: String!
-  description: String!
-  done: Boolean!
-}
-
-"""Todo quick aggregation type"""
-type AggregationsType {
-  total: Int!
-  pending: Int!
-  completed: Int!
-}
-
 type Item {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: ID!
+  name: String!
+  quantity: Float!
+  quantityType: String!
 }
 
 type Query {
-  Saludo: String!
-  Random_number: Float!
-  randomFromZeroTo(to: Int): Int!
-  todos(status: Boolean): [Todo!]!
-  todoById(id: Int!): Todo!
-  totalTodos: Int!
-  completedTodos: Int!
-  pendingTodos: Int!
-  aggregations: AggregationsType!
   items: [Item!]!
-  item(id: Int!): Item!
+  item(id: String!): Item!
 }
 
 type Mutation {
-  createTodo(createTodoInput: CreateTodoInput!): Todo!
-  updateTodo(createTodoInput: UpdateTodoInput!): Todo!
-  deleteTodo(id: Int!): Boolean!
-  createItem(createItemInput: CreateItemInput!): Item!
+  createItems(createItemInput: CreateItemInput!): Item!
   updateItem(updateItemInput: UpdateItemInput!): Item!
-  removeItem(id: Int!): Item!
-}
-
-input CreateTodoInput {
-  id: Int!
-  title: String!
-  description: String!
-  done: Boolean! = false
-}
-
-input UpdateTodoInput {
-  id: Int!
-  title: String!
-  description: String
-  done: Boolean! = false
+  removeItem(id: String!): Item!
 }
 
 input CreateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """Name of the item"""
+  name: String!
+  quantity: Float!
+
+  """Type of quantity"""
+  quantityType: String = "units"
 }
 
 input UpdateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  """Name of the item"""
+  name: String
+  quantity: Float
+
+  """Type of quantity"""
+  quantityType: String = "units"
+  id: String!
 }
